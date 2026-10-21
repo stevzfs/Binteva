@@ -1,0 +1,41 @@
+name: Validate and deploy Binteva
+on:
+  pull_request:
+  push:
+    branches: [main, build-binteva]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: binteva-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check PHP syntax
+        run: find wordpress -name '*.php' -print0 | xargs -0 -n 1 php -l
+      - name: Check JavaScript syntax
+        run: node --check wordpress/wp-content/themes/binteva-premium/assets/site.js
+      - name: Verify release scope
+        run: |
+          test -f wordpress/wp-content/themes/binteva-premium/style.css
+          test -f wordpress/wp-content/plugins/binteva-conversion-suite/binteva-conversion-suite.php
+          test ! -f wordpress/wp-config.php
+  deploy:
+    if: github.ref == 'refs/heads/main' && vars.HOSTINGER_DEPLOY_ENABLED == 'true'
+    needs: validate
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy only Binteva directories
+        env:
+          SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+          SSH_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
+          SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+          WP_CONTENT_PATH: ${{ secrets.HOSTINGER_WP_CONTENT_PATH }}
+        run: bash scripts/deploy-hostinger.sh
