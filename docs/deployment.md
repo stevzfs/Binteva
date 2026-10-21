@@ -2,7 +2,7 @@
 
 ## Required verified connection
 
-The hPanel sign-in route is currently restricted for this Cloud Browser. The server host, SSH port, username, actual WordPress directory and host-key fingerprint have not been obtained. Do not guess them. WordPress admin access alone does not establish SSH access.
+The hPanel sign-in route is currently restricted for this Cloud Browser. The actual WordPress directory has been verified through Site Health and retained privately for setup. The SSH host, port, deployment username and host-key fingerprint have not been obtained. Do not guess them. WordPress admin access alone does not establish SSH access.
 
 Use a dedicated least-privilege deployment identity. Store these values in the GitHub production environment as secrets:
 
