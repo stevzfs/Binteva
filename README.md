@@ -2,14 +2,14 @@
 
 Custom enterprise marketing website for Binteva, a commercial opportunity intelligence platform in development.
 
-- Theme: Binteva Premium 1.1.0
-- Plugin: Binteva Conversion Suite 1.1.0
+- Theme: Binteva Premium 1.1.1
+- Plugin: Binteva Conversion Suite 1.1.1
 - Repository: https://github.com/stevzfs/Binteva
 - Target WordPress: https://bisque-jackal-232127.hostingersite.com/
 
 ## Status
 
-Repository write access verified on October 21, 2026. Source is recovered and revised from the original packages. WordPress administrator access and a pre-installation database/content backup are verified. Hosting deployment, email delivery, off-site backup recovery and responsive visual QA are not verified yet. The workflow fails closed: deployment is disabled until verified server configuration and the explicit enable variable exist.
+Binteva Premium and Conversion Suite 1.1.1 are installed and active on the target WordPress site as of October 21, 2026. The homepage and all eight interior pages were checked in Cloud Browser. Phone and tablet previews were checked, including menu open/Escape dismissal and horizontal overflow. A pre-installation database/content backup remains available. GitHub Actions PHP/JavaScript validation passed. Automated SSH deployment, inquiry email delivery, off-site backup recovery and final legal details remain incomplete. Deployment stays disabled until the verified server configuration and production gate exist.
 
 ## Source layout
 
